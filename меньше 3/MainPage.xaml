@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="меньше_3.MainPage">
+
+    <RelativeLayout x:Name="rlt" VerticalOptions="Center" HorizontalOptions="Center">
+        <Image x:Name="img" Source="hicon.png"></Image>
+        <Grid x:Name="grd" Padding="30" ColumnSpacing="10" RowSpacing="20" VerticalOptions="Center" IsVisible="True"
+              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=img, Property=X}"
+              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=img, Property=Y }"
+              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=img, Property=Height, Factor=1, Constant=-20}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView, ElementName=img, Property=Width, Factor=1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.7*"></RowDefinition>
+            <RowDefinition Height="0.9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.1*"></ColumnDefinition>
+            <ColumnDefinition Width="1.9*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" LineBreakMode="NoWrap" FontAttributes="Bold" x:Name="indic"></Label>
+        <TimePicker PropertyChanged="setspan_PropertyChanged" x:Name="setspan" Grid.Row="1" Grid.Column="1" BackgroundColor="White"></TimePicker>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center" TextColor="White" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="BPM" ForegroundColor="DarkRed" BackgroundColor="White"></Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <StackLayout Grid.Row="2" Grid.Column="1">
+            <Label x:Name="frqer" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White">60</Label>
+            <Slider x:Name="slider" Maximum="90" Minimum="40" ThumbColor="DarkRed" MinimumTrackColor="DarkRed" Value="60" ValueChanged="Slider_ValueChanged"></Slider>
+        </StackLayout>
+        
+        <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="0" x:Name="toggle" CascadeInputTransparent="False">
+                <Switch x:Name="nopalevo" ThumbColor="DarkRed" OnColor="Firebrick" IsToggled="True" VerticalOptions="End" Toggled="Switch_Toggled"></Switch>
+                <Label x:Name="mode" TextColor="DarkRed" VerticalTextAlignment="End" HorizontalOptions="End" LineBreakMode="NoWrap">Беспалевный режим 🎧</Label>
+        </StackLayout>
+        <Button StyleId="bpm" x:Name="onoff" FontAttributes="Italic" Clicked="Button_Clicked" HorizontalOptions="Center" WidthRequest="120" Grid.Row="3" Grid.ColumnSpan="2" Text="ВКЛ"></Button>
+        </Grid>  
+    </RelativeLayout>
+    
+</ContentPage>
