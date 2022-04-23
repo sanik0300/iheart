@@ -4,9 +4,10 @@ using System.Globalization;
 
 namespace меньше_3
 {
+    enum Sentences : int { On, Off, Shh, Vibr, Title }
     public interface ILocal
     {
-        Dictionary<string, string> words { get; }
-        ILocal GetCurrentCultureInfo();
+        string[] words { get; }
+        bool NeedToDarkenLeTheme();
     }
 }

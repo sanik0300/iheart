@@ -14,7 +14,7 @@ namespace меньше_3_Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.2.0.155")]
 	public partial class Resource
 	{
 		
@@ -8740,6 +8740,9 @@ namespace меньше_3_Droid
 			
 			// aapt resource value: 0x7F070080
 			public const int tooltip_frame_light = 2131165312;
+			
+			// aapt resource value: 0x7F070081
+			public const int whiteIcon = 2131165313;
 			
 			static Drawable()
 			{

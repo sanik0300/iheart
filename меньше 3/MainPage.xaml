@@ -25,7 +25,7 @@
         <Label Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center" TextColor="White" >
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="BPM" ForegroundColor="DarkRed" BackgroundColor="White"></Span>
+                    <Span x:Name="bpms" Text="BPM" ForegroundColor="DarkRed" BackgroundColor="White"></Span>
                 </FormattedString>
             </Label.FormattedText>
         </Label>
