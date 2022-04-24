@@ -40,13 +40,15 @@ namespace меньше_3
         {
             base.OnAppearing();
             MessagingCenter.Subscribe<IBonk>(this, bonker.StopWordForMessages, ReceiveIbonkMessge);
+            PerharpsChangeTheme();
+        }
+        public void PerharpsChangeTheme() {
             if (!lol.NeedToDarkenLeTheme())
                 return;
             mode.TextColor = Color.White;
             bpms.BackgroundColor = Color.Transparent;
             bpms.ForegroundColor = Color.White;
         }
-
         private void ReceiveIbonkMessge(IBonk sender) { Button_Clicked(sender, null); }
 
         private static void update_timer_text() { link_to_indic.Text = beating ? new TimeSpan(seconds_sofar * 10000000).ToString() + "/" : null; }
@@ -72,13 +74,21 @@ namespace меньше_3
             seconds_sofar = 0;
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {                     
-            beating = !beating;
-            setspan.IsEnabled = !beating;
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            if (!beating) {
+                if (bonker.CallTakesPlace(lol.words[(int)Sentences.ThereIsCall]))
+                    return;
+
+                if (nopalevo.IsToggled && bonker.AlreadyMusic()) {
+                    if (!(await DisplayAlert("Аудио уже есть", "всё равно проигрывать?", "да", "нет")))
+                        return;
+                }
+            }
+
+            beating = setspan.IsEnabled = !beating;
             onoff.Text = beating ? lol.words[(int)Sentences.Off] : lol.words[(int)Sentences.On];                    
-            if (!beating)
-            {
+            if (!beating) {
                 indic.Text = null;
                 if (nopalevo.IsToggled)
                     bonker.Stop_and_Release_Ress();
@@ -101,8 +111,7 @@ namespace меньше_3
             {
                 if (nopalevo.IsToggled)
                     bonker.SingleBonk();
-                else
-                {
+                else {
                     Vibration.Vibrate(100);
                     await Task.Delay(150);
                     Vibration.Vibrate(100);

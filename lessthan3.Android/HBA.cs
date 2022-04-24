@@ -4,6 +4,8 @@ using Xamarin.Forms;
 using Android.Media;
 using Android.Content;
 using System;
+using Android.Telephony;
+using Android.Widget;
 
 [assembly: Dependency(typeof(меньше_3_Droid.SoundPlay))]
 namespace меньше_3_Droid
@@ -20,6 +22,19 @@ namespace меньше_3_Droid
             get { return mpl.Duration; }
         }
         private MediaPlayer mpl = MediaPlayer.Create(_cntx, Resource.Raw.hbeat);
+
+        bool IBonk.AlreadyMusic()
+        {
+            return ((AudioManager)_cntx.GetSystemService(Context.AudioService)).IsMusicActive;
+        }
+
+        bool IBonk.CallTakesPlace(string toasttxt)
+        {
+            bool conclusion = ((TelephonyManager)_cntx.GetSystemService(Context.TelephonyService)).CallState != CallState.Idle;
+            if (conclusion)
+                Toast.MakeText(_cntx, toasttxt, ToastLength.Short);
+            return conclusion;
+        }
 
         void IBonk.SingleBonk()
         {

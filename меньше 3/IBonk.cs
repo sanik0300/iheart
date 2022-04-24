@@ -13,6 +13,13 @@ namespace меньше_3
         void EndDisplaying();
         int duration { get; }
 
+        bool AlreadyMusic();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="toasttext">text of toast in case of fail</param>
+        /// <returns></returns>
+        bool CallTakesPlace(string toasttext);
         void ReportTimeLeft(TimeSpan tsp);
     }
 }

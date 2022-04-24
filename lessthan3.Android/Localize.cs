@@ -30,11 +30,11 @@ namespace меньше_3_Droid
 
             if (lang_name == "rus" || lang_name == "ukr" || lang_name == "bel" || lang_name == "kaz")
             {
-                wws = new string[6] { "ВКЛ", "ВЫКЛ", "Беспалевный режим", "Палевный режим", "Оживляем телефон :3", "Остановить" };
+                wws = new string[7] { "ВКЛ", "ВЫКЛ", "Беспалевный режим", "Палевный режим", "Оживляем телефон :3", "Остановить", "Звонок мешает воспроизведению" };
             }
             else
             {
-                wws = new string[6] { "ON", "OFF", "Sound mode", "Vibrating mode", "Enlivening the phone :3", "Stop" };
+                wws = new string[7] { "ON", "OFF", "Sound mode", "Vibrating mode", "Enlivening the phone :3", "Stop", "The current call prevents all the playback" };
             }
         }
     }

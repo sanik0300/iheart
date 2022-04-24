@@ -9,8 +9,15 @@ namespace меньше_3
         public App()
         {
             InitializeComponent();
-
+            App.Current = this;
             MainPage = new MainPage();
+
+            RequestedThemeChanged += App_RequestedThemeChanged;
+        }
+
+        private void App_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
+        {
+            (MainPage as MainPage).PerharpsChangeTheme();
         }
 
         protected override void OnStart()
