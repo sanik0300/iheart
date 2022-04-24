@@ -1,1 +1,1 @@
-I added night theme and functional notifications for foreground playback 
+This time I added behaviour to avoid current music playback and outcoming calls
