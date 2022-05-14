@@ -1,2 +1,1 @@
-# iheart
-Minimalistic heartbeat emulator for sleep... apparently
+I added night theme and functional notifications for foreground playback 
