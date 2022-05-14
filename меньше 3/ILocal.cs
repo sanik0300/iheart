@@ -1,7 +1,7 @@
 ﻿
 namespace меньше_3
 {
-    enum Sentences : int { On, Off, Shh, Vibr, Title, ThereIsCall }
+    public enum Sentences : int { On, Off, Shh, Vibr, Title, Stop, ThereIsCall, WaitThroughCall, AudioHere, IfStillPlay, Yes, No }
     public interface ILocal
     {
         string[] words { get; }

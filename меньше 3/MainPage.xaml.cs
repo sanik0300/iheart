@@ -39,17 +39,21 @@ namespace меньше_3
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<IBonk>(this, bonker.StopWordForMessages, ReceiveIbonkMessge);
+            MessagingCenter.Subscribe<IBonk>(this, "command_received", ReceiveIbonkMessge);
             PerharpsChangeTheme();
         }
-        public void PerharpsChangeTheme() {
+        public void PerharpsChangeTheme() 
+        {
             if (!lol.NeedToDarkenLeTheme())
                 return;
             mode.TextColor = Color.White;
             bpms.BackgroundColor = Color.Transparent;
             bpms.ForegroundColor = Color.White;
         }
-        private void ReceiveIbonkMessge(IBonk sender) { Button_Clicked(sender, null); }
+        private void ReceiveIbonkMessge(IBonk sender) 
+        {          
+            Button_Clicked(sender, sender.InteractWithServiceThisTime? EventArgs.Empty : null);
+        }
 
         private static void update_timer_text() { link_to_indic.Text = beating ? new TimeSpan(seconds_sofar * 10000000).ToString() + "/" : null; }
         private static void target(object lel)
@@ -76,31 +80,45 @@ namespace меньше_3
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
+            bool control_service_too = e != null; //null лишь в паре эбанутых случаев
+
             if (!beating) {
                 if (bonker.CallTakesPlace(lol.words[(int)Sentences.ThereIsCall]))
+                {
+                    if (sender is IBonk && control_service_too)
+                    {
+                        bonker.EndDisplaying();
+                        setspan.IsEnabled = true;
+                    }                     
                     return;
-
+                }
                 if (nopalevo.IsToggled && bonker.AlreadyMusic()) {
-                    if (!(await DisplayAlert("Аудио уже есть", "всё равно проигрывать?", "да", "нет")))
+                    if (!await DisplayAlert(lol.words[(int)Sentences.AudioHere], lol.words[(int)Sentences.IfStillPlay], 
+                                            lol.words[(int)Sentences.Yes], lol.words[(int)Sentences.No]))
                         return;
                 }
             }
+            beating = !beating;
 
-            beating = setspan.IsEnabled = !beating;
+            setspan.IsEnabled = !beating;
             onoff.Text = beating ? lol.words[(int)Sentences.Off] : lol.words[(int)Sentences.On];                    
             if (!beating) {
                 indic.Text = null;
                 if (nopalevo.IsToggled)
                     bonker.Stop_and_Release_Ress();
+
                 if (timer != null)
                     EndTimeredBeating();
 
-                bonker.EndDisplaying();
+                if (control_service_too)
+                    bonker.EndDisplaying();                                 
             }
             else
             {
-                bonker.BeginDisplaying(lol.words[(int)Sentences.Title]);
-                if (setspan.Time.TotalSeconds > 1)
+                if (control_service_too)
+                    bonker.BeginDisplaying(lol.words[(int)Sentences.Title]);
+
+                if (setspan.Time.TotalSeconds > 0)
                     timer = new Timer(callback, indic, 0, 1000);
                 DoABeat();              
             }        

@@ -5,7 +5,7 @@ namespace меньше_3
 {
     public interface IBonk
     {
-        string StopWordForMessages { get; }
+        bool InteractWithServiceThisTime { get; }
         void SingleBonk();
         void Stop_and_Release_Ress();
 
